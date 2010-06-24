@@ -258,6 +258,21 @@ module ShadowPuppet
       @executed = true
     end
 
+    def graph_to(name, destination)
+      evaluate_recipes
+
+      bucket             = export()
+      catalog            = bucket.to_catalog
+      relationship_graph = catalog.relationship_graph
+
+      dot = relationship_graph.to_dot_graph("name" => "#{name} Relationships".gsub(/\W+/, '_'))
+      dot.options['label'] = "#{name} Relationships"
+
+      File.open(destination, "w") { |f|
+          f.puts dot.to_s
+      }
+    end
+
     protected
 
     #Has this manifest instance been executed?
