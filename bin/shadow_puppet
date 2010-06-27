@@ -73,6 +73,12 @@ begin
 
   opts.parse!
 
+  # Take any variables set on the command line and update ENV
+  ARGV.delete_if do |arg|
+    next unless arg =~ /^(\w+)=(.*)$/
+    ENV[$1] = $2
+  end
+
   require 'rubygems'
 
   # hack around absurd number of deprecation warnings from puppet
