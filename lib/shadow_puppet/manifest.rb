@@ -166,7 +166,7 @@ module ShadowPuppet
     # Subsequent calls to configure perform a deep_merge of the provided
     # <tt>hash</tt> into the pre-existing configuration.
     def self.configure(hash)
-      __config__.deep_merge!(hash)
+      __config__.replace(__config__.deep_symbolize_keys.deep_merge(hash.deep_symbolize_keys))
     end
 
     # Update the configuration of this manifest instance's class.
