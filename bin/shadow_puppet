@@ -88,6 +88,9 @@ begin
   unless String.included_modules.include?(ActiveSupport::CoreExtensions::String::Inflections)
     String.send :include, ActiveSupport::CoreExtensions::String::Inflections
   end
+
+  require 'active_support/core_ext/hash'
+
   require 'fileutils'
 
   filename = ARGV[0]
